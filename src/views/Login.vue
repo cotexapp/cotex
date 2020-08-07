@@ -20,24 +20,10 @@
 			<div class="login__form__social">
 				<h2>SNS 로그인</h2>
 				<Button class="button login__form__social__naver">
-					<img
-						src="https://recruit.navercorp.com/img/favicon/naver_favicon.ico"
-						alt="Naver Logo"
-						width="28"
-						height="28"
-					/> 네이버로 로그인하기
+					<img src="https://recruit.navercorp.com/img/favicon/naver_favicon.ico" alt="Naver Logo" width="28" height="28" /> 네이버로 로그인하기
 				</Button>
-				<Button class="button login__form__social__kakao">
-					<img src="../assets/kakao.png" alt="Kakao Logo" width="28" height="28" /> 카카오로 로그인하기
-				</Button>
-				<Button class="button login__form__social__github">
-					<img
-						src="https://cdn.iconscout.com/icon/free/png-256/github-1767765-1502345.png"
-						alt="GitHub Logo"
-						width="24"
-						height="24"
-					/> GitHub로 로그인하기
-				</Button>
+				<Button class="button login__form__social__kakao"> <img src="../assets/kakao.png" alt="Kakao Logo" width="28" height="28" /> 카카오로 로그인하기 </Button>
+				<Button class="button login__form__social__github"> <i class="iconify github" data-icon="mdi-github"></i> GitHub로 로그인하기 </Button>
 			</div>
 			<hr />
 			<form action="javascript:void(0)" @submit="submit" class="login__form__loginbox">
@@ -47,27 +33,31 @@
 				</label>
 				<label class="inputbox">
 					<div class="login__label">비밀번호 &ast;</div>
-					<input
-						class="passwordinput"
-						v-model="password"
-						placeholder="Password"
-						required
-						type="password"
-					/>
+					<input class="passwordinput" v-model="password" placeholder="Password" required type="password" />
 				</label>
+				<Button class="login__from__submitBtn" type="submit">{{ !isRegister ? "로그인" : "가입하기" }}</Button>
 			</form>
-			<Button
-				class="login__from__submitBtn"
-				@click="submit"
-				type="submit"
-			>{{ !isRegister ? "로그인" : "가입하기" }}</Button>
 			<div v-if="!isRegister" class="login__form__first">
 				CoTex에 처음인가요?
-				<b @click="()=>{isRegister = true}">가입하기</b>
+				<b
+					@click="
+						() => {
+							isRegister = true;
+						}
+					"
+					>가입하기</b
+				>
 			</div>
 			<div v-else class="login__form__first">
 				이미 계정이 있으신가요?
-				<b @click="()=>{isRegister = false}">로그인</b>
+				<b
+					@click="
+						() => {
+							isRegister = false;
+						}
+					"
+					>로그인</b
+				>
 			</div>
 		</div>
 	</div>
@@ -88,19 +78,30 @@ export default class Login extends Vue {
 	id: string = "";
 	password: string = "";
 
-	submit() {
+	async submit() {
 		console.log(this.id, this.password);
 		if (this.id && this.password) {
-			if (!this.isRegister)
-				this.$store.dispatch("LOGIN", {
+			if (!this.isRegister) {
+				let res = await this.$store.dispatch("LOGIN", {
 					userID: this.id,
 					password: this.password,
 				});
-			else
-				this.$store.dispatch("REGISTER", {
+				if (res) {
+					this.$router.replace("/home");
+				} else {
+					alert("계정 정보가 일치하지 않습니다.");
+				}
+			} else {
+				let res = await this.$store.dispatch("REGISTER", {
 					userID: this.id,
 					password: this.password,
 				});
+				if (res) {
+					this.$router.replace("/home");
+				} else {
+					alert("회원가입에 실패하였습니다.");
+				}
+			}
 		}
 	}
 }
@@ -186,7 +187,8 @@ export default class Login extends Vue {
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				img {
+				img,
+				.iconify {
 					margin-right: 7px;
 				}
 				&.login__form__social__naver {
@@ -199,6 +201,9 @@ export default class Login extends Vue {
 					background-color: #ffffff;
 					border: 1px solid #eeeeee;
 					color: #1b1c30;
+					.github {
+						font-size: 24px;
+					}
 				}
 			}
 		}
