@@ -15,6 +15,8 @@
 
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	word-break: keep-all;
 }
 
 #app {
