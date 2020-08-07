@@ -66,12 +66,19 @@
 				</div>
 			</div>
 		</div>
+		<BookCreate></BookCreate>
 	</div>
 </template>
 
 <script lang="ts">
+import BookCreate from "../components/BookCreate.vue";
+
 import { Component, Vue, Watch } from "vue-property-decorator";
-@Component
+@Component({
+	components: {
+		BookCreate,
+	},
+})
 export default class Home extends Vue {
 	searchTimer: number = 0;
 	isNotification: boolean = false;
