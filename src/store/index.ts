@@ -9,20 +9,21 @@ export default new Vuex.Store({
 	state: {
 		token: "",
 		userData: {},
+		mainPath: "http://cotex.andy0414.com/api",
 	},
 	mutations: {},
 	actions: {
 		async LOGIN({ commit, state }, data) {
 			try {
 				let res = (
-					await axios.post("/api/auth/user/login", {
+					await axios.post(state.mainPath + "/auth/user/login", {
 						userID: data.userID,
 						password: data.userID,
 					})
 				).data;
 				state.token = res.data;
 				let user = (
-					await axios.get("/api/auth/user/my", {
+					await axios.get(state.mainPath + "/auth/user/my", {
 						headers: {
 							Authorization: state.token,
 						},
@@ -35,7 +36,7 @@ export default new Vuex.Store({
 		async REGISTER({ commit, state }, data) {
 			try {
 				let res = (
-					await axios.post("/api/auth/user", {
+					await axios.post(state.mainPath + "/auth/user", {
 						userID: data.userID,
 						password: data.userID,
 					})
