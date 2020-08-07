@@ -48,11 +48,9 @@
 					<i class="iconify" data-icon="mdi-plus-circle"></i>
 					새 책 추가하기
 				</div>
-				<span v-for="item in books" :key="item">
-					<div class="home__bookshelf__books__book pointer" :style="{ backgroundImage: 'url(' + item.image + ')' }">
-						<h3>{{ item.title }}</h3>
-					</div>
-				</span>
+				<div v-for="item in books" :key="item" class="home__bookshelf__books__book pointer" :style="{ backgroundImage: 'url(' + item.image + ')' }">
+					<h3>{{ item.title }}</h3>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -65,7 +63,7 @@ export default class Home extends Vue {
 	isNotification: boolean = false;
 	isProfile: boolean = false;
 	search: string = "";
-	books: any = [
+	books: object = [
 		{ title: "부의 대이동", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
 		{ title: "보통의 언어들", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
 		{ title: "인생의 태도", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
@@ -195,16 +193,26 @@ export default class Home extends Vue {
 				margin-right: 10px;
 
 				border-radius: 5px;
-			}
-			span {
-				height: 100%;
 
-				.home__bookshelf__books__book {
-					width: 200px;
-					height: 100%;
-					margin: 0 10px;
-					border: 1px solid black;
-				}
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+			}
+			.home__bookshelf__books__book {
+				display: flex;
+				justify-content: center;
+				align-items: flex-end;
+
+				width: 200px;
+				height: 100%;
+				margin: 0 10px;
+				padding: 25px 0;
+
+				border-radius: 5px;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+				background-position: center;
+				background-size: contain;
+
+				color: #ffffff;
 			}
 		}
 	}
