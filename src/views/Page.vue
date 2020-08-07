@@ -1,28 +1,44 @@
 <template>
 	<div class="page">
-		<div class="page__temp">
-			<button>생성</button>
+		<div class="page__topbar">
+			<img src alt="logo" />
+			<nav>
+				<p>페이지 편집</p>
+				<p>책 엮기</p>
+				<p>작업자 관리</p>
+				<p>관리자</p>
+			</nav>
 		</div>
-		<div class="page__grid" @mousemove="eventMove" @mouseup="eventEnd">
-			<div class="page__grid__box" ref="box">
-				<div
-					class="page__grid__box__cell"
-					v-for="cell in cells"
-					:key="cell.idx"
-					:style="`
+		<div class="page__wrapper">
+			<div class="page__temp">
+				<button>
+					<i class="iconify icon" data-icon="mdi-add"></i> 새로 만들기
+				</button>
+				<input type="text" placeholder="검색어를 입력하세요." />
+
+				<p>준비중입니다</p>
+			</div>
+			<div class="page__grid" @mousemove="eventMove" @mouseup="eventEnd">
+				<div class="page__grid__box" ref="box">
+					<div
+						class="page__grid__box__cell"
+						v-for="cell in cells"
+						:key="cell.idx"
+						:style="`
                     left:${gridWidth*cell.x}px;
                     top:${gridHeight*cell.y}px;
                     width:${gridWidth*cell.width}px;
                     height:${gridHeight*cell.height}px`"
-				>
-					<p>
-						<textarea type="text" v-model="cell.text" />
-					</p>
-					<button class="page__grid__box__cell__resize" @mousedown="eventStart($event,cell.idx)"></button>
+					>
+						<p>
+							<textarea type="text" v-model="cell.text" />
+						</p>
+						<button class="page__grid__box__cell__resize" @mousedown="eventStart($event,cell.idx)"></button>
+					</div>
 				</div>
 			</div>
+			<div class="page__celledit"></div>
 		</div>
-		<div class="page__celledit"></div>
 	</div>
 </template>
 
@@ -57,8 +73,8 @@ export default class Page extends Vue {
 	cells: Cell[] = [
 		{
 			idx: 0,
-			x: 1,
-			y: 1,
+			x: 0,
+			y: 0,
 			width: 2,
 			height: 2,
 			linkwith: [],
@@ -66,10 +82,10 @@ export default class Page extends Vue {
 		},
 		{
 			idx: 1,
-			x: 4,
-			y: 4,
-			width: 5,
-			height: 5,
+			x: 2,
+			y: 2,
+			width: 2,
+			height: 2,
 			linkwith: [],
 			text: "테스트",
 		},
@@ -143,41 +159,116 @@ export default class Page extends Vue {
 .page {
 	width: 100vw;
 	height: 100vh;
+
 	display: flex;
+	flex-direction: column;
+
+	.page__topbar {
+		height: 80px;
+
+		display: flex;
+		justify-content: space-between;
+        align-items: center;
+        
+        padding: 0 40px;
+
+		nav {
+			display: flex;
+			font-size: 24px;
+			font-weight: bold;
+			letter-spacing: 0.6px;
+			color: #1b1c30;
+			p {
+				margin-left: 50px;
+			}
+		}
+	}
+
+	.page__wrapper {
+		flex: 1;
+		display: flex;
+	}
+
 	.page__temp {
-		flex: 2;
-		background-color: #eeeeee;
+		flex: 1;
 		height: 100%;
+
+		display: flex;
+		flex-direction: column;
+
+		.icon {
+			font-size: 1.5em;
+			font-weight: bold;
+
+			margin: 0 10px;
+		}
+
+		button {
+			margin: 0 20px;
+
+			display: flex;
+			align-items: center;
+
+			border: none;
+			outline: none;
+			background-color: $primary-color;
+
+			border-radius: 30px;
+
+			color: white;
+
+			padding: 15px;
+
+			font-size: 21px;
+			letter-spacing: 0.52px;
+		}
+		input {
+			margin: 20px 20px;
+
+			border: none;
+			outline: none;
+			background-color: $focus-color;
+
+			border-radius: 30px;
+			padding: 15px;
+			font-size: 21px;
+		}
 	}
 	.page__grid {
+		overflow: hidden;
 		flex: 3;
 		background-color: #dddddd;
 		height: 100%;
-
-		padding: 10px;
 
 		display: flex;
 
 		.page__grid__box {
 			position: relative;
 
-			background-color: $primary-color;
+			background-color: #f0f0f0;
 			width: 100%;
 			height: 100%;
 			.page__grid__box__cell {
 				position: absolute;
 
-				background-color: $secondary-color;
+				background-color: #f6b400;
 
 				transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1);
 				p {
 					height: 100%;
 					textarea {
+						padding: 20px;
+						font-size: 14px;
+
+						background: none;
+						border: none;
 						outline: none;
 
 						width: 100%;
 						height: 100%;
 						resize: none;
+
+						color: white;
 					}
 				}
 
@@ -197,9 +288,12 @@ export default class Page extends Vue {
 				}
 			}
 		}
+		.page__grid__box__cell:nth-child(2n) {
+			background-color: #34d36e;
+		}
 	}
 	.page__celledit {
-		flex: 3;
+		flex: 1;
 		background-color: #cccccc;
 		height: 100%;
 	}
