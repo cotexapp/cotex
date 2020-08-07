@@ -20,28 +20,55 @@
 			<div class="login__form__social">
 				<h2>SNS 로그인</h2>
 				<Button class="button login__form__social__naver">
-					<img src="https://recruit.navercorp.com/img/favicon/naver_favicon.ico" alt="Naver Logo" width="28" height="28" /> 네이버로 로그인하기
+					<img
+						src="https://recruit.navercorp.com/img/favicon/naver_favicon.ico"
+						alt="Naver Logo"
+						width="28"
+						height="28"
+					/> 네이버로 로그인하기
 				</Button>
-				<Button class="button login__form__social__kakao"> <img src="../assets/kakao.png" alt="Kakao Logo" width="28" height="28" /> 카카오로 로그인하기 </Button>
+				<Button class="button login__form__social__kakao">
+					<img src="../assets/kakao.png" alt="Kakao Logo" width="28" height="28" /> 카카오로 로그인하기
+				</Button>
 				<Button class="button login__form__social__github">
-					<img src="https://cdn.iconscout.com/icon/free/png-256/github-1767765-1502345.png" alt="GitHub Logo" width="24" height="24" /> GitHub로 로그인하기
+					<img
+						src="https://cdn.iconscout.com/icon/free/png-256/github-1767765-1502345.png"
+						alt="GitHub Logo"
+						width="24"
+						height="24"
+					/> GitHub로 로그인하기
 				</Button>
 			</div>
 			<hr />
-			<form action="javascript:void(0)" @submit="submit"></form>
-			<div class="login__form__loginbox">
+			<form action="javascript:void(0)" @submit="submit" class="login__form__loginbox">
 				<label class="inputbox">
 					<div class="login__label">아이디 &ast;</div>
-					<TextInput v-model="id" placeholder="ID" required></TextInput>
+					<input class="textinput" v-model="id" placeholder="ID" required />
 				</label>
 				<label class="inputbox">
 					<div class="login__label">비밀번호 &ast;</div>
-					<PasswordInput v-model="password" placeholder="Password" required></PasswordInput>
+					<input
+						class="passwordinput"
+						v-model="password"
+						placeholder="Password"
+						required
+						type="password"
+					/>
 				</label>
+			</form>
+			<Button
+				class="login__from__submitBtn"
+				@click="submit"
+				type="submit"
+			>{{ !isRegister ? "로그인" : "가입하기" }}</Button>
+			<div v-if="!isRegister" class="login__form__first">
+				CoTex에 처음인가요?
+				<b @click="()=>{isRegister = true}">가입하기</b>
 			</div>
-			<Button class="login__from__submitBtn" @click="submit" type="submit">{{ !isRegister ? "로그인" : "가입하기" }}</Button>
-			<div v-if="!isRegister" class="login__form__first">CoTex에 처음인가요? <b @click="isRegister = true">가입하기</b></div>
-			<div v-else class="login__form__first">이미 계정이 있으신가요? <b @click="isRegister = false">로그인</b></div>
+			<div v-else class="login__form__first">
+				이미 계정이 있으신가요?
+				<b @click="()=>{isRegister = false}">로그인</b>
+			</div>
 		</div>
 	</div>
 </template>
@@ -49,14 +76,10 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import TextInput from "@/components/TextInput.vue";
-import PasswordInput from "@/components/PasswordInput.vue";
 import Button from "@/components/Button.vue";
 
 @Component({
 	components: {
-		TextInput,
-		PasswordInput,
 		Button,
 	},
 })
@@ -66,15 +89,16 @@ export default class Login extends Vue {
 	password: string = "";
 
 	submit() {
-		if (this.id.trim() && this.password.trim()) {
+		console.log(this.id, this.password);
+		if (this.id && this.password) {
 			if (!this.isRegister)
 				this.$store.dispatch("LOGIN", {
-					id: this.id,
+					userID: this.id,
 					password: this.password,
 				});
 			else
 				this.$store.dispatch("REGISTER", {
-					id: this.id,
+					userID: this.id,
 					password: this.password,
 				});
 		}

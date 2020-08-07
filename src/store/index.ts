@@ -9,7 +9,7 @@ export default new Vuex.Store({
 	state: {
 		token: "",
 		userData: {},
-		mainPath: "http://cotex.andy0414.com/api",
+		mainPath: "https://cotex.andy0414.com/api",
 	},
 	mutations: {},
 	actions: {
@@ -30,6 +30,7 @@ export default new Vuex.Store({
 					})
 				).data.data;
 				state.userData = user;
+				console.log(state.token, state.userData);
 				return user;
 			} catch (err) {}
 		},
