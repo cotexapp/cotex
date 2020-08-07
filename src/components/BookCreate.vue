@@ -5,28 +5,39 @@
 				<i class="iconify" data-icon="mdi-book"></i>
 				<h1>책 만들기 &ast;</h1>
 			</div>
-			<input v-model="title" class="bookcreate__input" placeholder="제목" type="text" />
-			<div>협업자</div>
+			<h2>제목</h2>
+			<input v-model="title" class="textinput" placeholder="제목" type="text" />
 			<div class="bookcreate__edit">
 				<div>
-					<input placeholder="관리자" type="text" required />
-					<div>관리자</div>
+					<h2>관리자</h2>
+					<input
+						placeholder="관리자"
+						:value="getUser.userID"
+						class="textinput"
+						type="text"
+						required
+						disabled
+					/>
 				</div>
 				<div>
-					<input placeholder="협업자 1" type="text" />
-					<div>협업자</div>
+					<h2>협업자</h2>
+					<input placeholder="협업자 1" class="textinput" type="text" />
 				</div>
 				<div>
-					<input placeholder="협업자 2" type="text" />
-					<div>협업자</div>
+					<h2>협업자</h2>
+					<input placeholder="협업자 2" class="textinput" type="text" />
 				</div>
 				<div>
-					<input placeholder="협업자 3" type="text" />
-					<div>협업자</div>
+					<h2>협업자</h2>
+					<input placeholder="협업자 3" class="textinput" type="text" />
 				</div>
 			</div>
-			<button type="submit">생성</button>
-			<button type="reset">취소</button>
+			<button
+				type="submit"
+				class="submit"
+				@click="()=>{$emit('submit',{title}); $router.push('/page')}"
+			>생성</button>
+			<button type="reset" class="reset" @click="()=>{$emit('close',false)}">취소</button>
 		</div>
 	</div>
 </template>
@@ -36,6 +47,10 @@ import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class BookCreate extends Vue {
 	title: string = "";
+
+	get getUser() {
+		return this.$store.state.userData;
+	}
 }
 </script>
 
@@ -57,6 +72,9 @@ export default class BookCreate extends Vue {
 	overflow: auto;
 	z-index: 2000;
 	.bookcreate__content {
+		padding: 40px;
+		border-radius: 20px;
+
 		background-color: #ffffff;
 		.bookcreate__title {
 			display: flex;
@@ -73,6 +91,39 @@ export default class BookCreate extends Vue {
 			align-items: center;
 			flex-direction: column;
 		}
+		h2 {
+			font-size: 1em;
+			line-height: 1.33;
+			letter-spacing: 0.3px;
+			color: #8f9bb3;
+
+			text-align: left;
+		}
+		input {
+			margin-bottom: 20px;
+
+			width: 400px;
+		}
+	}
+	.submit {
+		background-color: #0676ed;
+		padding: 15px 30px;
+		border-radius: 200px;
+		border: none;
+		outline: none;
+		box-shadow: 3px 3px 10px -1px rgba(11, 27, 102, 0.31);
+		color: white;
+		font-size: 16px;
+	}
+	.reset {
+		border: solid 1px #dae1ed;
+		background-color: #fdfefe;
+		padding: 15px 30px;
+		border-radius: 200px;
+		outline: none;
+		color: #dae1ed;
+		font-size: 16px;
+		margin-left: 20px;
 	}
 }
 </style>

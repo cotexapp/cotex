@@ -11,8 +11,12 @@
 				</div>
 				<span class="pointer" @click="toggleProfile">
 					김현우
-					<span v-if="!isProfile"><i class="iconify" data-icon="mdi-chevron-down"></i></span>
-					<span v-else><i class="iconify" data-icon="mdi-chevron-up"></i></span>
+					<span v-if="!isProfile">
+						<i class="iconify" data-icon="mdi-chevron-down"></i>
+					</span>
+					<span v-else>
+						<i class="iconify" data-icon="mdi-chevron-up"></i>
+					</span>
 				</span>
 				<div v-if="isProfile" class="profile pointer">
 					<!-- 알림 카드 -->
@@ -26,14 +30,11 @@
 			<div class="home__search">
 				<i class="iconify" data-icon="mdi-search"></i>
 				<input type="text" placeholder="검색어를 입력하세요 ..." v-model="search" />
-				<span
-					class="pointer"
-					@click="
+				<span class="pointer" @click="
 						() => {
 							search = '';
 						}
-					"
-				>
+					">
 					<i class="iconify" data-icon="mdi-close"></i>
 				</span>
 			</div>
@@ -44,7 +45,7 @@
 				정렬
 			</div>
 			<div class="home__bookshelf__books">
-				<div class="home__bookshelf__books__add pointer">
+				<div class="home__bookshelf__books__add pointer" @click="()=>{isShowBookCreate = true}">
 					<i class="iconify" data-icon="mdi-plus-circle"></i>
 					새 책 추가하기
 				</div>
@@ -56,17 +57,9 @@
 				>
 					<h3>{{ item.title }}</h3>
 				</div>
-				<div
-					v-for="(item, idx) in books"
-					:key="idx"
-					class="home__bookshelf__books__book pointer"
-					:style="{ backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url(' + item.image + ')' }"
-				>
-					<h3>{{ item.title }}</h3>
-				</div>
 			</div>
 		</div>
-		<BookCreate></BookCreate>
+		<BookCreate v-if="isShowBookCreate" @close="()=>{isShowBookCreate = false}"></BookCreate>
 	</div>
 </template>
 
@@ -80,19 +73,41 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 	},
 })
 export default class Home extends Vue {
+	isShowBookCreate: boolean = false;
 	searchTimer: number = 0;
 	isNotification: boolean = false;
 	isProfile: boolean = false;
 	search: string = "";
 	filteredBooks: any = [];
 	books: any = [
-		{ title: "부의 대이동", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
-		{ title: "보통의 언어들", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
-		{ title: "인생의 태도", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
-		{ title: "통찰과 역설1", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
-		{ title: "통찰과 역설2", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
-		{ title: "통찰과 역설3", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
-		{ title: "통찰과 역설4", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
+		{
+			title: "부의 대이동",
+			image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg",
+		},
+		{
+			title: "보통의 언어들",
+			image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg",
+		},
+		{
+			title: "인생의 태도",
+			image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg",
+		},
+		{
+			title: "통찰과 역설1",
+			image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg",
+		},
+		{
+			title: "통찰과 역설2",
+			image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg",
+		},
+		{
+			title: "통찰과 역설3",
+			image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg",
+		},
+		{
+			title: "통찰과 역설4",
+			image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg",
+		},
 	];
 
 	@Watch("search")
@@ -102,12 +117,22 @@ export default class Home extends Vue {
 		}
 		this.searchTimer = setTimeout(() => {
 			// TODO
-			this.filteredBooks = this.filteredBooks.filter((books: any) => books.title.toLowerCase().indexOf(this.search.toLowerCase()) != -1);
+			this.filteredBooks = this.books.filter(
+				(books: any) =>
+					books.title
+						.toLowerCase()
+						.indexOf(this.search.toLowerCase()) != -1
+			);
 		}, 300);
 	}
 
 	get getUserData() {
 		return this.$store.state.userData;
+	}
+
+	created() {
+		if (!this.getUserData.userID) this.$router.push("/login");
+		this.filteredBooks = this.books;
 	}
 
 	toggleNotification() {

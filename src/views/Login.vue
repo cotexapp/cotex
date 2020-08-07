@@ -19,7 +19,7 @@
 
 			<div class="login__form__social">
 				<h2>SNS 로그인</h2>
-				<Button class="button login__form__social__naver">
+				<Button class="button login__form__social__naver" @click="naverLogin">
 					<img
 						src="https://recruit.navercorp.com/img/favicon/naver_favicon.ico"
 						alt="Naver Logo"
@@ -27,10 +27,10 @@
 						height="28"
 					/> 네이버로 로그인하기
 				</Button>
-				<Button class="button login__form__social__kakao">
+				<Button class="button login__form__social__kakao" @click="kakaoLogin">
 					<img src="@/assets/kakao.png" alt="Kakao Logo" width="28" height="28" /> 카카오로 로그인하기
 				</Button>
-				<Button class="button login__form__social__github">
+				<Button class="button login__form__social__github" @click="githubLogin">
 					<i class="iconify github" data-icon="mdi-github"></i> GitHub로 로그인하기
 				</Button>
 			</div>
@@ -87,6 +87,19 @@ export default class Login extends Vue {
 	id: string = "";
 	password: string = "";
 
+	naverLogin() {
+		window.location.href =
+			"https://cotex.andy0414.com/api/auth/user/login/naver";
+	}
+	kakaoLogin() {
+		window.location.href =
+			"https://cotex.andy0414.com/api/auth/user/login/kakao";
+	}
+	githubLogin() {
+		window.location.href =
+			"https://cotex.andy0414.com/api/auth/user/login/github";
+	}
+
 	async submit() {
 		if (this.id && this.password) {
 			if (!this.isRegister) {
@@ -95,7 +108,7 @@ export default class Login extends Vue {
 					password: this.password,
 				});
 				if (res) {
-					this.$router.replace("/home");
+					this.$router.replace("/");
 				} else {
 					alert("계정 정보가 일치하지 않습니다.");
 				}

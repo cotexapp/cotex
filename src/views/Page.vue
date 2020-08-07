@@ -31,7 +31,7 @@
                     height:${gridHeight*cell.height}px`"
 					>
 						<p>
-							<textarea type="text" v-model="cell.text" />
+							<textarea type="text" v-model="cell.text" @input="dataUpdate" />
 						</p>
 						<button class="page__grid__box__cell__resize" @mousedown="eventStart($event,cell.idx)"></button>
 					</div>
@@ -45,12 +45,12 @@
 					<button>코드</button>
 				</div>
 				<div class="page__celledit__wrapper">
-					<input type="text" placeholder="X" v-model="cells[selectedIndex].x" />
-					<input type="text" placeholder="Y" v-model="cells[selectedIndex].y" />
+					<input type="text" placeholder="X" v-model="cells[selectedIndex].x" @input="dataUpdate" />
+					<input type="text" placeholder="Y" v-model="cells[selectedIndex].y" @input="dataUpdate" />
 				</div>
 				<div class="page__celledit__wrapper">
-					<input type="text" placeholder="가로" v-model="cells[selectedIndex].width" />
-					<input type="text" placeholder="세로" v-model="cells[selectedIndex].height" />
+					<input type="text" placeholder="가로" v-model="cells[selectedIndex].width" @input="dataUpdate" />
+					<input type="text" placeholder="세로" v-model="cells[selectedIndex].height" @input="dataUpdate" />
 				</div>
 				<div class="page__celledit__content">
 					<h3>텍스트</h3>
@@ -124,10 +124,7 @@ export default class Page extends Vue {
 		};
 		if (cell.idx == 0) this.selectedIndex = 0;
 		this.cells.push(cell);
-		this.$socket.client.emit("update", {
-			pageId: "test",
-			cell: this.cells,
-		});
+		this.dataUpdate();
 	}
 
 	mounted() {
@@ -184,13 +181,14 @@ export default class Page extends Vue {
 		this.startResize = false;
 		this.startPositionX = 0;
 		this.startPositionY = 0;
-
+		this.dataUpdate();
+	}
+	dataUpdate() {
 		this.$socket.client.emit("update", {
 			pageId: "test",
 			cell: this.cells,
 		});
 	}
-
 	get getUser() {
 		return this.$store.state.userData;
 	}
