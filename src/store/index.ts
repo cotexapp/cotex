@@ -45,6 +45,78 @@ export default new Vuex.Store({
 				return res.result;
 			} catch (err) {}
 		},
+		async MY_PAGE({ commit, state }, data) {
+			try {
+				let res = (
+					await axios.post(
+						state.mainPath + "/page/my-page",
+						{},
+						{
+							headers: {
+								Authorization: state.token,
+							},
+						}
+					)
+				).data;
+				return res;
+			} catch (err) {}
+		},
+		async CREATE_PAGE({ commit, state }, data) {
+			let res = (
+				await axios.post(
+					state.mainPath + "/page",
+					{ content: data.content },
+					{
+						headers: {
+							Authorization: state.token,
+						},
+					}
+				)
+			).data;
+			return res;
+		},
+		async DELETE_PAGE({ commit, state }, data) {
+			let res = (
+				await axios.delete(state.mainPath + "/page/" + data.pageId + "/invite", {
+					headers: {
+						Authorization: state.token,
+					},
+				})
+			).data;
+			return res;
+		},
+		async INVITE({ commit, state }, data) {
+			try {
+				let res = (
+					await axios.post(
+						state.mainPath + "/page/" + data.pageId + "/invite",
+						{ userID: data.userID },
+						{
+							headers: {
+								Authorization: state.token,
+							},
+						}
+					)
+				).data;
+				return res;
+			} catch (err) {}
+		},
+		async KICK({ commit, state }, data) {
+			try {
+				let res = (
+					await axios.post(
+						state.mainPath + "/page/" + data.pageId + "/kick",
+						{ userID: data.userID },
+						{
+							headers: {
+								Authorization: state.token,
+							},
+						}
+					)
+				).data;
+				return res;
+			} catch (err) {}
+		},
 	},
 	modules: {},
 });
