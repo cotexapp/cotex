@@ -48,7 +48,7 @@
 					<i class="iconify" data-icon="mdi-plus-circle"></i>
 					새 책 추가하기
 				</div>
-				<div v-for="item in books" :key="item" class="home__bookshelf__books__book pointer" :style="{ backgroundImage: 'url(' + item.image + ')' }">
+				<div v-for="(item, idx) in books" :key="idx" class="home__bookshelf__books__book pointer" :style="{ backgroundImage: 'url(' + item.image + ')' }">
 					<h3>{{ item.title }}</h3>
 				</div>
 			</div>
@@ -67,10 +67,10 @@ export default class Home extends Vue {
 		{ title: "부의 대이동", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
 		{ title: "보통의 언어들", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
 		{ title: "인생의 태도", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
-		{ title: "통찰과 역설", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
-		{ title: "통찰과 역설", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
-		{ title: "통찰과 역설", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
-		{ title: "통찰과 역설", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
+		{ title: "통찰과 역설1", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
+		{ title: "통찰과 역설2", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
+		{ title: "통찰과 역설3", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
+		{ title: "통찰과 역설4", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
 	];
 
 	get getUserData() {
@@ -195,6 +195,10 @@ export default class Home extends Vue {
 				border-radius: 5px;
 
 				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+				.iconify {
+					font-size: 30px;
+					margin-bottom: 7px;
+				}
 			}
 			.home__bookshelf__books__book {
 				display: flex;
