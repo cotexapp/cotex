@@ -5,15 +5,18 @@
 </template>
 
 <style lang="scss">
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
 * {
 	margin: 0;
 	padding: 0;
 
 	box-sizing: border-box;
-	// font-family: "Noto Sans KR", sans-serif;
+	font-family: "NanumSquare", sans-serif;
+
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
 #app {
 	text-align: center;
 	color: $text-color;
