@@ -158,6 +158,7 @@ export default class Login extends Vue {
 			}
 			.button {
 				margin-bottom: 15px;
+				padding: 8px;
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -189,7 +190,9 @@ export default class Login extends Vue {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			margin-top: 10px;
 			b {
+				margin-left: 5px;
 				cursor: pointer;
 			}
 		}
