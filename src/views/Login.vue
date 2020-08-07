@@ -22,7 +22,7 @@
 				<Button class="button login__form__social__naver">
 					<img src="https://recruit.navercorp.com/img/favicon/naver_favicon.ico" alt="Naver Logo" width="28" height="28" /> 네이버로 로그인하기
 				</Button>
-				<Button class="button login__form__social__kakao"> <img src="../assets/kakao.png" alt="Kakao Logo" width="28" height="28" /> 카카오로 로그인하기 </Button>
+				<Button class="button login__form__social__kakao"> <img src="@/assets/kakao.png" alt="Kakao Logo" width="28" height="28" /> 카카오로 로그인하기 </Button>
 				<Button class="button login__form__social__github"> <i class="iconify github" data-icon="mdi-github"></i> GitHub로 로그인하기 </Button>
 			</div>
 			<hr />
@@ -196,11 +196,12 @@ export default class Login extends Vue {
 				}
 				&.login__form__social__kakao {
 					background-color: #ffe812;
+					color: $text-color;
 				}
 				&.login__form__social__github {
 					background-color: #ffffff;
 					border: 1px solid #eeeeee;
-					color: #1b1c30;
+					color: $text-color;
 					.github {
 						font-size: 24px;
 					}
