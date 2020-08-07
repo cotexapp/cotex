@@ -49,6 +49,14 @@
 					새 책 추가하기
 				</div>
 				<div
+					v-for="(item, idx) in filteredBooks"
+					:key="idx"
+					class="home__bookshelf__books__book pointer"
+					:style="{ backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url(' + item.image + ')' }"
+				>
+					<h3>{{ item.title }}</h3>
+				</div>
+				<div
 					v-for="(item, idx) in books"
 					:key="idx"
 					class="home__bookshelf__books__book pointer"
@@ -62,13 +70,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 @Component
 export default class Home extends Vue {
+	searchTimer: number = 0;
 	isNotification: boolean = false;
 	isProfile: boolean = false;
 	search: string = "";
-	books: object = [
+	filteredBooks: any = [];
+	books: any = [
 		{ title: "부의 대이동", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
 		{ title: "보통의 언어들", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
 		{ title: "인생의 태도", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
@@ -77,6 +87,17 @@ export default class Home extends Vue {
 		{ title: "통찰과 역설3", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
 		{ title: "통찰과 역설4", image: "https://m.media-amazon.com/images/I/51d2e+67u1L.jpg" },
 	];
+
+	@Watch("search")
+	isSearchChanged() {
+		if (this.searchTimer) {
+			clearTimeout(this.searchTimer);
+		}
+		this.searchTimer = setTimeout(() => {
+			// TODO
+			this.filteredBooks = this.filteredBooks.filter((books: any) => books.title.toLowerCase().indexOf(this.search.toLowerCase()) != -1);
+		}, 300);
+	}
 
 	get getUserData() {
 		return this.$store.state.userData;
