@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1320px" height="960px" viewBox="0 0 1320 960" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>mdpi/Group 10</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="990" height="564" rx="10"></rect>
+        <filter x="-14.9%" y="-25.9%" width="129.9%" height="152.5%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="49" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0464652535 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-4" x="33" y="406" width="445" height="280" rx="10"></rect>
+        <filter x="-33.3%" y="-52.1%" width="166.5%" height="205.7%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="49" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0464652535 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-6" x="512" y="490" width="445" height="280" rx="10"></rect>
+        <filter x="-33.3%" y="-52.1%" width="166.5%" height="205.7%" filterUnits="objectBoundingBox" id="filter-7">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="49" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0464652535 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-8" x="198" y="411" width="445" height="256" rx="10"></rect>
+        <filter x="-33.3%" y="-57.0%" width="166.5%" height="215.6%" filterUnits="objectBoundingBox" id="filter-9">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="49" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0464652535 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <circle id="path-10" cx="25" cy="25" r="25"></circle>
+        <rect id="path-12" x="677" y="411" width="445" height="340" rx="10"></rect>
+        <filter x="-33.3%" y="-42.9%" width="166.5%" height="187.1%" filterUnits="objectBoundingBox" id="filter-13">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="49" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0464652535 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-14" x="198" y="354" width="554" height="37" rx="10"></rect>
+        <filter x="-26.7%" y="-394.6%" width="153.4%" height="900.0%" filterUnits="objectBoundingBox" id="filter-15">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="49" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0464652535 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="📄-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop">
+            <g id="Group-10">
+                <rect id="Rectangle-Copy" fill="#8B00FF" x="0" y="0" width="1320" height="960"></rect>
+                <path d="M0,725.5 C179.321301,579.48123 390.276602,540.309871 632.865904,607.985923 C875.455205,675.661974 1104.4999,639.666667 1320,500 L1320,960 L0,960 L0,725.5 Z" id="Path-2" fill="#9A20FF"></path>
+                <g id="Rectangle-Copy-6" transform="translate(165.000000, 296.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Mask">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                    <g mask="url(#mask-2)">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                        <use fill="#F0F0F0" fill-rule="evenodd" xlink:href="#path-4"></use>
+                    </g>
+                    <g id="Rectangle-Copy-7" mask="url(#mask-2)">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-7)" xlink:href="#path-6"></use>
+                        <use fill="#F7B500" fill-rule="evenodd" xlink:href="#path-6"></use>
+                    </g>
+                </g>
+                <g id="Rectangle">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-9)" xlink:href="#path-8"></use>
+                    <use fill="#298FFF" fill-rule="evenodd" xlink:href="#path-8"></use>
+                </g>
+                <g id="Group-9" transform="translate(610.000000, 642.000000)">
+                    <g id="Oval-Copy-3">
+                        <mask id="mask-11" fill="white">
+                            <use xlink:href="#path-10"></use>
+                        </mask>
+                        <use id="Mask" fill="#34D36E" xlink:href="#path-10"></use>
+                        <circle fill="#FEBE12" mask="url(#mask-11)" cx="25" cy="46" r="21"></circle>
+                    </g>
+                    <circle id="Oval" fill="#FFE293" cx="25.5" cy="21.5" r="12.5"></circle>
+                </g>
+                <g id="Rectangle-Copy-8">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-13)" xlink:href="#path-12"></use>
+                    <use fill="#F0F0F0" fill-rule="evenodd" xlink:href="#path-12"></use>
+                </g>
+                <g id="Rectangle-Copy-5">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-15)" xlink:href="#path-14"></use>
+                    <use fill="#F0F0F0" fill-rule="evenodd" xlink:href="#path-14"></use>
+                </g>
+                <circle id="Oval" fill="#FF6159" cx="189" cy="320" r="8"></circle>
+                <circle id="Oval-Copy" fill="#FFBD2E" cx="213" cy="320" r="8"></circle>
+                <circle id="Oval-Copy-2" fill="#29CB42" cx="237" cy="320" r="8"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

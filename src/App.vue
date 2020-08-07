@@ -16,6 +16,6 @@
 }
 #app {
 	text-align: center;
-	color: $primary-color;
+	color: $text-color;
 }
 </style>

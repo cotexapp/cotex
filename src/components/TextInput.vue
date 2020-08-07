@@ -23,5 +23,10 @@ export default class TextInput extends Vue {}
 	border-radius: 5px;
 	padding: 15px;
 	transition: 0.2s;
+
+	border: solid 1px #dae1ed;
+	&:focus {
+		border: solid 1px #0676ed;
+	}
 }
 </style>
