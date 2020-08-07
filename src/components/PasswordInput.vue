@@ -18,11 +18,14 @@ export default class PasswordInput extends Vue {}
 
 	background-color: $nofocus-color;
 
+	font-family: sans-serif;
+
 	font-size: 1em;
 
 	border-radius: 5px;
 	padding: 15px;
 	transition: 0.2s;
+	color: black;
 
 	border: solid 1px #dae1ed;
 	&:focus {

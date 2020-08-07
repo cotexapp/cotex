@@ -24,7 +24,7 @@
 				</Button>
 				<Button class="button login__form__social__kakao"> <img src="../assets/kakao.png" alt="Kakao Logo" width="28" height="28" /> 카카오로 로그인하기 </Button>
 				<Button class="button login__form__social__github">
-					<img src="https://cdn.iconscout.com/icon/free/png-256/github-1767765-1502345.png" alt="GitHub Logo" width="28" height="28" /> GitHub로 로그인하기
+					<img src="https://cdn.iconscout.com/icon/free/png-256/github-1767765-1502345.png" alt="GitHub Logo" width="24" height="24" /> GitHub로 로그인하기
 				</Button>
 			</div>
 			<hr />
@@ -39,7 +39,7 @@
 					<PasswordInput v-model="password" placeholder="Password" required></PasswordInput>
 				</label>
 			</div>
-			<Button class="login__from__loginbtn" @click="submit">로그인</Button>
+			<Button class="login__from__submitBtn" @click="submit" type="submit">{{ !isRegister ? "로그인" : "가입하기" }}</Button>
 			<div v-if="!isRegister" class="login__form__first">CoTex에 처음인가요? <b @click="isRegister = true">가입하기</b></div>
 			<div v-else class="login__form__first">이미 계정이 있으신가요? <b @click="isRegister = false">로그인</b></div>
 		</div>
@@ -158,6 +158,12 @@ export default class Login extends Vue {
 			}
 			.button {
 				margin-bottom: 15px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				img {
+					margin-right: 7px;
+				}
 				&.login__form__social__naver {
 					background-color: #1ec800;
 				}
@@ -173,7 +179,7 @@ export default class Login extends Vue {
 		}
 		.login__form__loginbox {
 		}
-		.login__from__loginbtn {
+		.login__from__submitBtn {
 			margin-top: 40px;
 			width: 100%;
 			font-size: 14px;
@@ -183,6 +189,9 @@ export default class Login extends Vue {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			b {
+				cursor: pointer;
+			}
 		}
 	}
 	.inputbox {
@@ -190,7 +199,7 @@ export default class Login extends Vue {
 			color: $secondary-color;
 			font-weight: bold;
 
-			margin: 20px 0;
+			margin: 20px 0 7px 0;
 		}
 		input {
 			font-size: 14px;

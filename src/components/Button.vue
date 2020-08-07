@@ -1,4 +1,3 @@
-
 <template>
 	<button class="button" v-on="$listeners" v-bind="$props">
 		<slot></slot>
