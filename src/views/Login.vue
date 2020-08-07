@@ -20,10 +20,19 @@
 			<div class="login__form__social">
 				<h2>SNS 로그인</h2>
 				<Button class="button login__form__social__naver">
-					<img src="https://recruit.navercorp.com/img/favicon/naver_favicon.ico" alt="Naver Logo" width="28" height="28" /> 네이버로 로그인하기
+					<img
+						src="https://recruit.navercorp.com/img/favicon/naver_favicon.ico"
+						alt="Naver Logo"
+						width="28"
+						height="28"
+					/> 네이버로 로그인하기
 				</Button>
-				<Button class="button login__form__social__kakao"> <img src="@/assets/kakao.png" alt="Kakao Logo" width="28" height="28" /> 카카오로 로그인하기 </Button>
-				<Button class="button login__form__social__github"> <i class="iconify github" data-icon="mdi-github"></i> GitHub로 로그인하기 </Button>
+				<Button class="button login__form__social__kakao">
+					<img src="@/assets/kakao.png" alt="Kakao Logo" width="28" height="28" /> 카카오로 로그인하기
+				</Button>
+				<Button class="button login__form__social__github">
+					<i class="iconify github" data-icon="mdi-github"></i> GitHub로 로그인하기
+				</Button>
 			</div>
 			<hr />
 			<form action="javascript:void(0)" @submit="submit" class="login__form__loginbox">
@@ -33,31 +42,31 @@
 				</label>
 				<label class="inputbox">
 					<div class="login__label">비밀번호 &ast;</div>
-					<input class="passwordinput" v-model="password" placeholder="Password" required type="password" />
+					<input
+						class="passwordinput"
+						v-model="password"
+						placeholder="Password"
+						required
+						type="password"
+					/>
 				</label>
 				<Button class="login__from__submitBtn" type="submit">{{ !isRegister ? "로그인" : "가입하기" }}</Button>
 			</form>
 			<div v-if="!isRegister" class="login__form__first">
 				CoTex에 처음인가요?
-				<b
-					@click="
+				<b @click="
 						() => {
 							isRegister = true;
 						}
-					"
-					>가입하기</b
-				>
+					">가입하기</b>
 			</div>
 			<div v-else class="login__form__first">
 				이미 계정이 있으신가요?
-				<b
-					@click="
+				<b @click="
 						() => {
 							isRegister = false;
 						}
-					"
-					>로그인</b
-				>
+					">로그인</b>
 			</div>
 		</div>
 	</div>
@@ -79,7 +88,6 @@ export default class Login extends Vue {
 	password: string = "";
 
 	async submit() {
-		console.log(this.id, this.password);
 		if (this.id && this.password) {
 			if (!this.isRegister) {
 				let res = await this.$store.dispatch("LOGIN", {
@@ -97,7 +105,7 @@ export default class Login extends Vue {
 					password: this.password,
 				});
 				if (res) {
-					this.$router.replace("/home");
+					this.$router.replace("/");
 				} else {
 					alert("회원가입에 실패하였습니다.");
 				}
