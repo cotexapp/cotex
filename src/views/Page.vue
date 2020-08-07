@@ -11,7 +11,7 @@
 		</div>
 		<div class="page__wrapper">
 			<div class="page__temp">
-				<button>
+				<button @click="createCell">
 					<i class="iconify icon" data-icon="mdi-add"></i> 새로 만들기
 				</button>
 				<input type="text" placeholder="검색어를 입력하세요." />
@@ -37,7 +37,26 @@
 					</div>
 				</div>
 			</div>
-			<div class="page__celledit"></div>
+			<div class="page__celledit" v-if="selectedIndex != -1">
+				<input type="text" placeholder="셀 이름" />
+				<div class="page__celledit__action">
+					<button>이미지</button>
+					<button>텍스트</button>
+					<button>코드</button>
+				</div>
+				<div class="page__celledit__wrapper">
+					<input type="text" placeholder="X" v-model="cells[selectedIndex].x" />
+					<input type="text" placeholder="Y" v-model="cells[selectedIndex].y" />
+				</div>
+				<div class="page__celledit__wrapper">
+					<input type="text" placeholder="가로" v-model="cells[selectedIndex].width" />
+					<input type="text" placeholder="세로" v-model="cells[selectedIndex].height" />
+				</div>
+				<div class="page__celledit__content">
+					<h3>텍스트</h3>
+					<textarea cols="30" rows="10" v-model="cells[selectedIndex].text"></textarea>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -48,6 +67,11 @@ import { Component, Vue } from "vue-property-decorator";
 import TextInput from "@/components/TextInput.vue";
 import PasswordInput from "@/components/PasswordInput.vue";
 import Button from "@/components/Button.vue";
+
+import io from "socket.io-client";
+import { Socket } from "vue-socket.io-extended";
+import VueSocketIOExt from "vue-socket.io-extended";
+const socket = io("https://cotex.andy0414.com/");
 
 interface Cell {
 	idx: number;
@@ -60,6 +84,8 @@ interface Cell {
 	img?: string; // 이미지 경로
 }
 
+Vue.use(VueSocketIOExt, socket);
+
 @Component
 export default class Page extends Vue {
 	gridX: number = 9;
@@ -70,26 +96,8 @@ export default class Page extends Vue {
 	height: number = 0;
 	offsetLeft: number = 0;
 	offsetTop: number = 0;
-	cells: Cell[] = [
-		{
-			idx: 0,
-			x: 0,
-			y: 0,
-			width: 2,
-			height: 2,
-			linkwith: [],
-			text: "테스트",
-		},
-		{
-			idx: 1,
-			x: 2,
-			y: 2,
-			width: 2,
-			height: 2,
-			linkwith: [],
-			text: "테스트",
-		},
-	];
+	cells: Cell[] = [];
+	permission: any[] = [];
 
 	box!: HTMLDivElement;
 
@@ -98,6 +106,29 @@ export default class Page extends Vue {
 	startPositionY: number = 0;
 	startWidth: number = 0;
 	startHeight: number = 0;
+
+	startResize: boolean = false;
+
+	createCell() {
+		let cell: Cell = {
+			idx:
+				this.cells.length > 0
+					? this.cells[this.cells.length - 1].idx + 1
+					: 0,
+			x: 0,
+			y: 0,
+			width: 1,
+			height: 1,
+			linkwith: [],
+			text: "테스트",
+		};
+		if (cell.idx == 0) this.selectedIndex = 0;
+		this.cells.push(cell);
+		this.$socket.client.emit("update", {
+			pageId: "test",
+			cell: this.cells,
+		});
+	}
 
 	mounted() {
 		this.box = this.$refs.box as HTMLDivElement;
@@ -126,9 +157,11 @@ export default class Page extends Vue {
 		this.startHeight = cell!.height;
 
 		this.selectedIndex = idx;
+
+		this.startResize = true;
 	}
 	eventMove(e: MouseEvent) {
-		if (this.selectedIndex != -1) {
+		if (this.startResize) {
 			let x = e.clientX - this.offsetLeft;
 			let y = e.clientY - this.offsetTop;
 
@@ -148,9 +181,33 @@ export default class Page extends Vue {
 		}
 	}
 	eventEnd(e: MouseEvent) {
-		this.selectedIndex = -1;
+		this.startResize = false;
 		this.startPositionX = 0;
 		this.startPositionY = 0;
+
+		this.$socket.client.emit("update", {
+			pageId: "test",
+			cell: this.cells,
+		});
+	}
+
+	get getUser() {
+		return this.$store.state.userData;
+	}
+
+	@Socket()
+	connect() {
+		console.log("START");
+		this.$socket.client.emit("joinRoom", { pageId: "test" });
+	}
+	@Socket("joinRoom")
+	onJoinRoom() {
+		console.log("join clear");
+	}
+	@Socket("update")
+	onUpdate(data: any) {
+		this.cells = data.cell;
+		this.permission = data.permission;
 	}
 }
 </script>
@@ -168,9 +225,9 @@ export default class Page extends Vue {
 
 		display: flex;
 		justify-content: space-between;
-        align-items: center;
-        
-        padding: 0 40px;
+		align-items: center;
+
+		padding: 0 40px;
 
 		nav {
 			display: flex;
@@ -204,6 +261,7 @@ export default class Page extends Vue {
 		}
 
 		button {
+			cursor: pointer;
 			margin: 0 20px;
 
 			display: flex;
@@ -258,7 +316,7 @@ export default class Page extends Vue {
 					height: 100%;
 					textarea {
 						padding: 20px;
-						font-size: 14px;
+						font-size: 21px;
 
 						background: none;
 						border: none;
@@ -291,11 +349,84 @@ export default class Page extends Vue {
 		.page__grid__box__cell:nth-child(2n) {
 			background-color: #34d36e;
 		}
+		.page__grid__box__cell:nth-child(3n) {
+			background-color: $primary-color;
+		}
 	}
 	.page__celledit {
 		flex: 1;
-		background-color: #cccccc;
 		height: 100%;
+
+		display: flex;
+		flex-direction: column;
+
+		.page__celledit__action {
+			display: flex;
+			margin: 0 20px;
+			margin-top: 20px;
+
+			button {
+				flex: 1;
+				margin-right: 20px;
+			}
+			button:last-child {
+				margin-right: 0;
+			}
+		}
+
+		.page__celledit__wrapper {
+			display: flex;
+
+			input {
+				width: 100%;
+				margin-top: 20px;
+				flex: 1;
+			}
+		}
+
+		input {
+			border: none;
+			outline: none;
+
+			border-radius: 13px;
+			background-color: $focus-color;
+
+			padding: 15px;
+			font-size: 21px;
+
+			margin: 0 20px;
+		}
+		button {
+			border: none;
+			outline: none;
+
+			border-radius: 13px;
+			background-color: $focus-color;
+
+			padding: 15px;
+			font-size: 18px;
+		}
+	}
+	.page__celledit__content {
+		border-radius: 13px;
+		background-color: $focus-color;
+
+		margin: 0 20px;
+		margin-top: 20px;
+
+		padding: 20px 0;
+		h3 {
+			letter-spacing: -0.28px;
+			color: #a7a7a7;
+		}
+		textarea {
+			padding: 20px;
+
+			border-radius: 13px;
+			border: solid 1px #dfdfdf;
+
+			width: 90%;
+		}
 	}
 }
 </style>

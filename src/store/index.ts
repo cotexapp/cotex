@@ -30,7 +30,6 @@ export default new Vuex.Store({
 					})
 				).data.data;
 				state.userData = user;
-				console.log(state.token, state.userData);
 				return user;
 			} catch (err) {}
 		},
