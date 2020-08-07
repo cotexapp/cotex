@@ -48,7 +48,12 @@
 					<i class="iconify" data-icon="mdi-plus-circle"></i>
 					새 책 추가하기
 				</div>
-				<div v-for="(item, idx) in books" :key="idx" class="home__bookshelf__books__book pointer" :style="{ backgroundImage: 'url(' + item.image + ')' }">
+				<div
+					v-for="(item, idx) in books"
+					:key="idx"
+					class="home__bookshelf__books__book pointer"
+					:style="{ backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url(' + item.image + ')' }"
+				>
 					<h3>{{ item.title }}</h3>
 				</div>
 			</div>
