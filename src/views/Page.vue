@@ -1,7 +1,7 @@
 <template>
 	<div class="page">
 		<div class="page__topbar">
-			<img src alt="logo" />
+			<img src="@/assets/logo.svg" alt="logo" />
 			<nav>
 				<p>페이지 편집</p>
 				<p>책 엮기</p>

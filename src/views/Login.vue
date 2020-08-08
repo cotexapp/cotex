@@ -12,7 +12,7 @@
 		</div>
 		<div class="login__form">
 			<div class="login__form__header">
-				<img src alt="로고" class="logo" />
+				<img src="@/assets/logo.svg" alt="logo" class="logo" />
 				<h2>{{ !isRegister ? "로그인" : "가입하기" }}</h2>
 				<p>CoTeX에서 손쉽게 출판을 시작해보세요.</p>
 			</div>
@@ -188,10 +188,8 @@ export default class Login extends Vue {
 				font-size: 14px;
 			}
 			.logo {
-				display: inline-block;
-				background: $primary-color;
-				width: 60px;
-				height: 60px;
+                display: inline-block;
+                margin-bottom: 10px;
 			}
 		}
 		.login__form__social {

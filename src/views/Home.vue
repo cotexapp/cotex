@@ -1,7 +1,7 @@
 <template>
 	<div class="home">
 		<div class="home__appBar">
-			<img src alt="Logo" />
+			<img src="@/assets/logo.svg" alt="Logo" class="logo" />
 			<div>
 				<span class="pointer" @click="toggleNotification">
 					<i class="iconify" data-icon="mdi-bell"></i>
@@ -152,6 +152,11 @@ export default class Home extends Vue {
 
 <style lang="scss" scoped>
 .home {
+	.logo {
+        filter: brightness(10);
+        margin-top: 15px;
+        margin-left: 10px;
+	}
 	.home__appBar {
 		position: absolute;
 		top: 0;
