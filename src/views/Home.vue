@@ -10,7 +10,7 @@
 					<!-- 알림 카드 -->
 				</div>
 				<span class="pointer" @click="toggleProfile">
-					김현우
+					{{getUserData.userID}}
 					<span v-if="!isProfile">
 						<i class="iconify" data-icon="mdi-chevron-down"></i>
 					</span>
@@ -50,6 +50,7 @@
 					새 책 추가하기
 				</div>
 				<div
+					@click="()=>{ $router.push('/page')}"
 					v-for="(item, idx) in filteredBooks"
 					:key="idx"
 					class="home__bookshelf__books__book pointer"
@@ -153,9 +154,9 @@ export default class Home extends Vue {
 <style lang="scss" scoped>
 .home {
 	.logo {
-        filter: brightness(10);
-        margin-top: 15px;
-        margin-left: 10px;
+		filter: brightness(10);
+		margin-top: 15px;
+		margin-left: 10px;
 	}
 	.home__appBar {
 		position: absolute;
