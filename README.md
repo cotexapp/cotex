@@ -1,19 +1,9 @@
-# cotex
+# CoTeX
 
-## Project setup
-```
-npm install
-```
+Co-op + Text
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+누구나 퍼블리싱을 손쉽게
 
-### Compiles and minifies for production
-```
-npm run build
-```
+복잡하고 번거로운 퍼블리싱 툴 대신 셀 단위의 사용자간 실시간 편집을 통해
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+새로운 차원의 퍼블리싱을 경험해보세요
