@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     token: "",
     userData: {},
-    mainPath: "/api",
+    mainPath: "https://cotex-api.hyunwoo.dev",
   },
   mutations: {},
   actions: {
