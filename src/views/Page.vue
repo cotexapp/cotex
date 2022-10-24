@@ -69,7 +69,7 @@ import Button from "@/components/Button.vue";
 import io from "socket.io-client";
 import { Socket } from "vue-socket.io-extended";
 import VueSocketIOExt from "vue-socket.io-extended";
-const socket = io("https://cotex.hyunwoo.dev/");
+const socket = io("https://cotex-api.hyunwoo.dev/");
 
 interface Cell {
   idx: number;
